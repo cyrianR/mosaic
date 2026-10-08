@@ -4,7 +4,7 @@ close all;
 % Lecture des images
 Im1 = imread('cancale1.pgm');
 Im2 = imread('cancale2.pgm');
-Im3 = imread(cancale13.pgm');
+Im3 = imread('cancale3.pgm');
 Im1_coul = imread('cancale1.jpg');
 Im2_coul = imread('cancale2.jpg');
 Im3_coul = imread('cancale3.jpg');
@@ -25,12 +25,13 @@ seuil = 0.9;
 % Detection des points d'interet avec Harris %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A DECOMMENTER POUR OBSERVER LA DETECTION DE HARRIS
-% [XY_1,Res_1] = harris(Im1,TailleFenetre,NbPoints,k);
-% [XY_2,Res_2] = harris(Im2,TailleFenetre,NbPoints,k);
-% figure;
-% affichage_POI(Im1,XY_1,'POI Image 1',1,2,1);
-% affichage_POI(Im2,XY_2,'POI Image 2',1,2,2);
+[XY_1,Res_1] = harris(Im1,TailleFenetre,NbPoints,k);
+[XY_2,Res_2] = harris(Im2,TailleFenetre,NbPoints,k);
+figure;
+affichage_POI(Im1,XY_1,'POI Image 1',1,2,1);
+affichage_POI(Im2,XY_2,'POI Image 2',1,2,2);
 
+voisinage(Im1, [5 5; 10 10], 3)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Appariement des points d'interet %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
