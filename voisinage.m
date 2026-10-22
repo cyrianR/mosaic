@@ -12,7 +12,7 @@ function voisins = voisinage(I,xyPt,TailleFenetre)
 % voisins : une matrice contenant pour chaque ligne (= chaque point),
 %           le voisinage du point associe
 % Nombre de points pour lesquels leur voisinage est cherche
-npt = size(xyPt,1); 
+npt = size(xyPt,1);
 
 % Initialisation
 voisins = zeros(npt,TailleFenetre*TailleFenetre);
@@ -24,8 +24,8 @@ k = floor(TailleFenetre/2);
 % A COMPLETER %
 %%%%%%%%%%%%%%%%%
 for point = 1:npt
-    x = xyPt(point,1);
-    y = xyPt(point,2);
+    x = xyPt(point,2);
+    y = xyPt(point,1);
     fenetre_I = I(x-k:x+k, y-k:y+k);
     voisins(point,:) = reshape(fenetre_I,[],1);
 end

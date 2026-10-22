@@ -37,7 +37,7 @@ voisinage(Im1, [5 5; 10 10], 3)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A DECOMMENTER POUR OBSERVER LA MISE EN CORRESPONDANCE 
 % avec/sans verification des contraintes
-% [XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil);
+[XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Estimation (et verification) de l'homographie %
