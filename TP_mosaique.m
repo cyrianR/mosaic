@@ -49,11 +49,11 @@ H = homographie(XY_C1,XY_C2)
 % Calcul de la mosaique %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % A DECOMMENTER QUAND HOMOGRAPHIE AURA ETE VALIDEE
-% Imos = mosaique(Im1,Im2,H);
-% figure; 
-% affichage_image(uint8(Imos),'Mosaique obtenue a partir des 2 images initiales',1,1,1);
+Imos = mosaique(Im1,Im2,H);
+figure; 
+affichage_image(uint8(Imos),'Mosaique obtenue a partir des 2 images initiales',1,1,1);
 % SAUVEGARDE DE LA MOSAIQUE A DEUX IMAGES
-% imwrite(uint8(Imos),'mosaique2.pgm');
+imwrite(uint8(Imos),'mosaique2.pgm');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Version 2 pour la reconstruction                %

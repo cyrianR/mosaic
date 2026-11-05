@@ -15,14 +15,19 @@ function [xy2] = appliquerHomographie(H,xy1)
 
 % Nombre de points
 % ... A completer ...
+Nb = size(xy1,1);
 
 % Construction des coordonnees homogenes pour appliquer l'homographie
 % ... A completer ...
+xy1_homogene = [xy1 ones(Nb,1)];
 
 % Application de l'homographie
 % ... A completer ...
-
+xy2 = H*xy1_homogene';
+xy2 = xy2';
 % On retourne les coordonnees homogenes (x,y,1)
 % Pour cela, il faut diviser par z
 % Attention il ne faut garder que les deux premieres coordonnees
 % ... A completer ...
+
+xy2 = xy2(:,1:2) ./ xy2(:,3);
