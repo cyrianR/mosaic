@@ -43,7 +43,7 @@ voisinage(Im1, [5 5; 10 10], 3)
 % Estimation (et verification) de l'homographie %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A DECOMMENTER QUAND HOMOGRAPHIE AURA ETE COMPLETEE
-% H = homographie(XY_C1,XY_C2)
+H = homographie(XY_C1,XY_C2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Calcul de la mosaique %
