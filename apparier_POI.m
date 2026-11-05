@@ -15,11 +15,11 @@ C = abs(C);
 
 % Recherche par methode WTA (Winner Takes All)
 % Indices des maxima sur les lignes
-[maxI1 ind1_2] = max(C');
+[max1, ind1_2] = max(C, [], 2);
 ind1_2 = ind1_2(:);
 
 % Indices des maxima sur les colonnes
-[maxI2 ind2_1] = max(C);
+[~, ind2_1] = max(C, [], 1);
 ind2_1 = ind2_1(:);
 
 % Verification de la contrainte de symetrie 
@@ -29,6 +29,12 @@ ind2_1 = ind2_1(:);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Cette premiere ligne doit etre modifiee pour appliquer les contraintes souhaitees % 
 ind1=ind1_2;
+
+% contraintes seuil et symétrie
+pts = (1:size(C,1))';
+pts_eq = ind2_1(ind1_2) == pts;
+
+ind1 = find(pts_eq & max1 >= seuil);
 
 % Cette deuxieme doit etre gardee telle quelle
 ind2 = ind1_2(ind1);
@@ -46,4 +52,3 @@ affichage_appariement(Im2,mesurex2,mesurey2,'Points d''interet correspondants Im
 XY_C1 = [mesurex1(:) mesurey1(:)];
 XY_C2 = [mesurex2(:) mesurey2(:)];
 end
-

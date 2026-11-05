@@ -27,9 +27,11 @@ function C = apparier_Points(I1,Ptint1,I2,Ptint2,K)
 % K : Taille de la fenetre de correlation utilisee
 
 % Dimensions des images
-[height_I1 width_I1] = size(I1); [height_I2 width_I2] = size(I2);
+[height_I1 width_I1] = size(I1);
+[height_I2 width_I2] = size(I2);
 % Nombres de points d'interet de l'image 1 et de l'image 2
-nptI1 = size(Ptint1,1); nptI2 = size(Ptint2,1);
+nptI1 = size(Ptint1,1);
+nptI2 = size(Ptint2,1);
 % Construction de la matrice des mesures de correlation
 % Suppression de tous les points pour lesquels la fenêtre de corrélation
 % n'est pas appliquable
@@ -48,14 +50,15 @@ nbptintI1 = size(indptI1,1); nbptintI2 = size(indptI2,1);
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
-vois1 =  voisinage(I1,Ptint1(indptI1,:),K)
+vois1 =  voisinage(I1,Ptint1(indptI1,:),K);
 vois2 =  voisinage(I2,Ptint2(indptI2,:),K);
 
 % Nb Pixels par fenetre de correlation
 NbPix = K*K;
 % Calcul de tous les appariements possibles
 [i1 i2] = meshgrid(1:nbptintI1,1:nbptintI2); 
-i1 = i1(:); i2 = i2(:);
+i1 = i1(:);
+i2 = i2(:);
 
 % Pour les images I1 et I2
 % Moyenne des niveaux de gris du voisinage de chaque point
@@ -71,28 +74,29 @@ mean2 = mean(vois2,2);
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
-var1 = var(vois1,0,2);
-var2 = var(vois2,0,2);
+var1 = var(vois1,1,2);
+var2 = var(vois2,1,2);
 
 % Pour chaque combinaison de paires de points, la covariance 
 % entre les deux voisinages : le numerateur dans la formule ZNCC
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
-size((vois1(i1,:)))
-size(repmat(mean1(i1), nbptintI1*nbptintI2, 1))
-covariance = mean((vois1(i1,:)-repmat(mean1(i1), nbptintI1*nbptintI2, 1)).*(vois2(i2,:)-repmat(mean2(i2),nbptintI1*nbptintI2, 1)), 2)
-
+% size((vois1(i1,:)))
+% size(repmat(mean1(i1), nbptintI1*nbptintI2, 1))
+covariance = ((vois1 - mean1) * (vois2 - mean2)') / NbPix;
+% covariance = mean((vois1(i1,:)-repmat(mean1(i1), nbptintI1*nbptintI2, 1)).*(vois2(i2,:)-repmat(mean2(i2),nbptintI1*nbptintI2, 1)), 2)
+v1 = vois1(i1,:) - repmat(mean1(i1),1,NbPix);
+v2 = vois2(i2,:) - repmat(mean2(i2),1,NbPix);
+covariance = mean(v1 .* v2,2);
 % Calcul du score de correlation : 
 % ajouter le denominateur dans la formule ZNCC 
 % (le produit des variances)
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
-%den = sqrt(var1(i1)*var2(i2));
-
+den = sqrt(var1(i1).*var2(i2));
+cor = covariance./den;
 
 % Affectation a la matrice C
 C(indptI1(i1)+(indptI2(i2)-1)*nptI1) = cor';
-
-
