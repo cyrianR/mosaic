@@ -1,4 +1,4 @@
-function [XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil,contrainte)
+function [XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil,contrainte,affichage)
 % apparierPOI apparie les points d'interet stockes dans XY_1 et XY_2 entre
 % les images Im1 et Im2 avec une fenetre de correlation de taille
 % TailleFenetre
@@ -58,9 +58,11 @@ mesurey1 = XY_1(ind1,2);
 mesurex2 = XY_2(ind2,1);
 mesurey2 = XY_2(ind2,2);
 
-figure;
-affichage_appariement(Im1,mesurex1,mesurey1,'Points d''interet Image 1',1,2,1);
-affichage_appariement(Im2,mesurex2,mesurey2,'Points d''interet correspondants Image 2',1,2,2);
+if affichage
+    figure;
+    affichage_appariement(Im1,mesurex1,mesurey1,'Points d''interet Image 1',1,2,1);
+    affichage_appariement(Im2,mesurex2,mesurey2,'Points d''interet correspondants Image 2',1,2,2);
+end
 
 XY_C1 = [mesurex1(:) mesurey1(:)];
 XY_C2 = [mesurex2(:) mesurey2(:)];

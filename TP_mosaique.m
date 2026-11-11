@@ -38,7 +38,8 @@ voisinage(Im1, [5 5; 10 10], 3)
 % A DECOMMENTER POUR OBSERVER LA MISE EN CORRESPONDANCE 
 % avec/sans verification des contraintes
 contrainte = "all"; % choisir une contrainte : "aucune", "seuil", "symetrie" ou "all"
-[XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil,contrainte);
+affichage = true;
+[XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil,contrainte,affichage);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Estimation (et verification) de l'homographie %
@@ -81,8 +82,12 @@ imwrite(uint8(Imoscoul),'mosaique2_coul.jpg');
 % en couleurs et/ou en niveaux de gris           %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % À COMPLETER % 
-images = [Im1 Im2 Im3];
+images = cell(1,3);
+images{1} = Im1_coul;
+images{2} = Im2_coul;
+images{3} = Im3_coul;
 ImosN = mosaiqueN(images, TailleFenetre, NbPoints, k, seuil);
+figure;
 affichage_image(uint8(ImosN),'Mosaique obtenue a partir de N images couleur initiales (version 4)',1,1,1);
 imwrite(uint8(ImosN),'mosaiqueN.jpg');
 

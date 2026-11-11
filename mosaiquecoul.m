@@ -90,7 +90,7 @@ for x=1:nbcImos,
     if(x_R2>=1 & x_R2<=nbcI2 & y_R2>=1 & y_R2<=nblI2)
         % Si on est dans l'image I1 et I2, moyenne pondérée
         if (x_R1>=1 & x_R1<=nbcI1 & y_R1>=1 & y_R1<=nblI1)
-            d1 = nbcI1 - y_R1;
+            d1 = nbcI1 - x_R1;
             d2 = y_R2;
             p1 = d1/(d1+d2);
             p2 = d2/(d1+d2);
