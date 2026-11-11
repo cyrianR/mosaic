@@ -1,4 +1,4 @@
-function [XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil)
+function [XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil,contrainte)
 % apparierPOI apparie les points d'interet stockes dans XY_1 et XY_2 entre
 % les images Im1 et Im2 avec une fenetre de correlation de taille
 % TailleFenetre
@@ -28,13 +28,26 @@ ind2_1 = ind2_1(:);
 %% PARTIE A MODIFIER AFIN D'APPLIQUER SYMETRIE ET SEUILLAGE %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Cette premiere ligne doit etre modifiee pour appliquer les contraintes souhaitees % 
-ind1=ind1_2;
+switch string(contrainte)
+    case "aucune"
+        ind1 = ind1_2;
 
-% contraintes seuil et symétrie
-pts = (1:size(C,1))';
-pts_eq = ind2_1(ind1_2) == pts;
+    case "symetrie"
+        pts = (1:size(C,1))';
+        pts_eq = ind2_1(ind1_2) == pts;
+        ind1 = find(pts_eq);
 
-ind1 = find(pts_eq & max1 >= seuil);
+    case "seuil"
+        ind1 = find(max1 >= seuil);
+
+    case "all"
+        pts = (1:size(C,1))';
+        pts_eq = ind2_1(ind1_2) == pts;
+        ind1 = find(pts_eq & max1 >= seuil);
+
+    otherwise
+        error('Contrainte non reconnue');
+end
 
 % Cette deuxieme doit etre gardee telle quelle
 ind2 = ind1_2(ind1);

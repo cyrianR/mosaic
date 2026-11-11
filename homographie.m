@@ -41,7 +41,8 @@ y1 = XY_C1(:,2);
 x2 = XY_C2(:,1);
 y2 = XY_C2(:,2);
 
-A = [x1 y1 ones(Nb,1) zeros(Nb,3) -x1.*x2 -y1.*x2 -x2; zeros(Nb,3) x1 y1 ones(Nb,1) -x1.*y2 -y1.*y2 -y2];
+A = [x1 y1 ones(Nb,1) zeros(Nb,3) -x1.*x2 -y1.*x2 -x2; 
+    zeros(Nb,3) x1 y1 ones(Nb,1) -x1.*y2 -y1.*y2 -y2];
 
 % Estimation des parametres de H par decomposition en valeurs singulieres
 % Utiliser la fonction matlab svd : 

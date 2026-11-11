@@ -82,10 +82,6 @@ var2 = var(vois2,1,2);
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
-% size((vois1(i1,:)))
-% size(repmat(mean1(i1), nbptintI1*nbptintI2, 1))
-covariance = ((vois1 - mean1) * (vois2 - mean2)') / NbPix;
-% covariance = mean((vois1(i1,:)-repmat(mean1(i1), nbptintI1*nbptintI2, 1)).*(vois2(i2,:)-repmat(mean2(i2),nbptintI1*nbptintI2, 1)), 2)
 v1 = vois1(i1,:) - repmat(mean1(i1),1,NbPix);
 v2 = vois2(i2,:) - repmat(mean2(i2),1,NbPix);
 covariance = mean(v1 .* v2,2);

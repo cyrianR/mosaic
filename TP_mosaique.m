@@ -37,7 +37,8 @@ voisinage(Im1, [5 5; 10 10], 3)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A DECOMMENTER POUR OBSERVER LA MISE EN CORRESPONDANCE 
 % avec/sans verification des contraintes
-[XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil);
+contrainte = "all"; % choisir une contrainte : "aucune", "seuil", "symetrie" ou "all"
+[XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,seuil,contrainte);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Estimation (et verification) de l'homographie %
@@ -59,25 +60,29 @@ imwrite(uint8(Imos),'mosaique2.pgm');
 % Version 2 pour la reconstruction                %
 % A DECOMMENTER QUAND MOSAIQUEBIS AURA ETE ECRITE %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Imosbis = mosaiquebis(Im1,Im2,H);
-% figure; 
-% affichage_image(uint8(Imosbis),'Mosaique obtenue a partir des 2 images initiales (version 2)',1,1,1);
+Imosbis = mosaiquebis(Im1,Im2,H);
+figure; 
+affichage_image(uint8(Imosbis),'Mosaique obtenue a partir des 2 images initiales (version 2)',1,1,1);
 % SAUVEGARDE DE LA MOSAIQUE A DEUX IMAGES VERSION 2
-% imwrite(uint8(Imosbis),'mosaique2_bis.pgm');
+imwrite(uint8(Imosbis),'mosaique2_bis.pgm');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Version 3 pour la reconstruction avec les couleurs R, G et B %
 % A DECOMMENTER QUAND MOSAIQUECOUL AURA ETE ECRITE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Imoscoul = mosaiquecoul(Im1_coul,Im2_coul,H);
-% figure;
-% affichage_image(uint8(Imoscoul),'Mosaique obtenue a partir des 2 images couleur initiales (version 2)',1,1,1);
+Imoscoul = mosaiquecoul(Im1_coul,Im2_coul,H);
+figure;
+affichage_image(uint8(Imoscoul),'Mosaique obtenue a partir des 2 images couleur initiales (version 3)',1,1,1);
 % SAUVEGARDE DE LA MOSAIQUE A DEUX IMAGES EN COULEUR VERSION 2
-% imwrite(uint8(Imoscoul),'mosaique2_coul.pgm');
+imwrite(uint8(Imoscoul),'mosaique2_coul.jpg');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Version 4 pour la reconstruction avec 3 images %  
 % en couleurs et/ou en niveaux de gris           %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % À COMPLETER % 
+images = [Im1 Im2 Im3];
+ImosN = mosaiqueN(images, TailleFenetre, NbPoints, k, seuil);
+affichage_image(uint8(ImosN),'Mosaique obtenue a partir de N images couleur initiales (version 4)',1,1,1);
+imwrite(uint8(ImosN),'mosaiqueN.jpg');
 
