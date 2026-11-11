@@ -229,9 +229,9 @@ Paramètres réglés dans le script :
 
 | Paramètre | Valeur | Correspondances | Mosaïque |
 |---|---|---|---|
-| TailleFenetre | 9 | 18 | nulle |
+| TailleFenetre | 9 | 18 | fausse |
 | TailleFenetre | 15 | 6 | correcte |
-| TailleFenetre | 21 | 8 | nulle |
+| TailleFenetre | 21 | 8 | fausse |
 | NbPoints | 50 | 5 | correcte |
 | NbPoints | 100 | 6 | correcte |
 | NbPoints | 200 | 14 | fausse |
