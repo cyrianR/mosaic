@@ -12,9 +12,13 @@ ymin = 1;
 xmax = nbcI1;
 ymax = nblI1;
 
+fprintf('\nCalcul des homographies :\n');
+
 % Calculer les homographies des images par rapport à I1 dans l'ordre
 % et les dimensions de la mosaique
 for i=1:N-1
+
+    fprintf('Progression : %3.0f %% (%d/%d images)\n', 100*i/(N-1), i, N-1);
 
     Imi = rgb2gray(images{i});
     Imiplus1 = rgb2gray(images{i+1});
@@ -100,10 +104,23 @@ O1y_Rmos = 1-(ymin-1);
 % Lignes et colonnes sont inversees. 
 Imos(O1y_Rmos:O1y_Rmos+nblI1-1, O1x_Rmos:O1x_Rmos+nbcI1-1, :) = images{1};
 
+fprintf('\nConstruction de la mosaique :\n');
+total = nbcImos*nblImos;
+pixels = 0;
+prev_pourc = -1;
+
 % Copie des autres images transformees par leurs homographies respectives
 % par rapport à I1.
 for x=1:nbcImos,
   for y=1:nblImos,
+
+    pixels = pixels + 1;
+    pourc = floor(100*pixels/total);
+    if pourc > prev_pourc
+        fprintf('Progression : %3d %%\n', pourc);
+        prev_pourc = pourc;
+    end
+
     % Calcul des coordonnees dans I1 connaissant les coordonnees du point origine de I1 dans Imos. 
     y_R1=y-O1y_Rmos;
     x_R1=x-O1x_Rmos;
