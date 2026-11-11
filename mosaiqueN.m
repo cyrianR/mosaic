@@ -134,11 +134,11 @@ for x=1:nbcImos,
             % Si on est aussi dans l'image Iimoins1, moyenne pondérée
             if (x_Rimoins1>=1 & x_Rimoins1<=nbcIimoins1 & y_Rimoins1>=1 & y_Rimoins1<=nblIimoins1)
                 d1 = nbcIimoins1 - x_Rimoins1;
-                d2 = y_Ri;
+                d2 = x_Ri;
                 p1 = d1/(d1+d2);
                 p2 = d2/(d1+d2);
-                Imos(y,x,:)=p1.*images{i-1}(y_Rimoins1,x_Rimoins1,:) + ...
-                    p2.*images{i}(y_Ri,x_Ri,:);
+                Imos(y,x,:)=p1.*Imos(y,x,:) + ...
+                    p2.*double(images{i}(y_Ri,x_Ri,:));
             else
                 Imos(y,x,:)=images{i}(y_Ri,x_Ri,:);
             end
