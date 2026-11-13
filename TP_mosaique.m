@@ -103,10 +103,10 @@ k = 0.05;
 
 images = cell(1,5);
 for i=1:5
-    images{i} = imread('images/salon_' + string(i) + '.jpg');
+    images{i} = imread('images_bis/salon_' + string(i) + '.jpg');
 end
 ImosN = mosaiqueN(images, TailleFenetre, NbPoints, k, seuil);
 figure;
 affichage_image(uint8(ImosN),'Mosaique obtenue a partir de N images couleur initiales (version 4)',1,1,1);
-imwrite(uint8(ImosN),'images/mosaiqueN_salon.jpg');
+imwrite(uint8(ImosN),'images_bis/mosaiqueN_salon.jpg');
 
