@@ -82,38 +82,29 @@ imwrite(uint8(Imoscoul),'mosaique2_coul.jpg');
 % en couleurs et/ou en niveaux de gris           %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % À COMPLETER % 
-% images = cell(1,3);
-% images{1} = Im1_coul;
-% images{2} = Im2_coul;
-% images{3} = Im3_coul;
-% ImosN = mosaiqueN(images, TailleFenetre, NbPoints, k, seuil);
-% figure;
-% affichage_image(uint8(ImosN),'Mosaique obtenue a partir de N images couleur initiales (version 4)',1,1,1);
-% imwrite(uint8(ImosN),'mosaiqueN.jpg');
+images = cell(1,3);
+images{1} = Im1_coul;
+images{2} = Im2_coul;
+images{3} = Im3_coul;
+ImosN = mosaiqueN(images, TailleFenetre, NbPoints, k, seuil);
+figure;
+affichage_image(uint8(ImosN),'Mosaique obtenue a partir de N images couleur initiales (version 4)',1,1,1);
+imwrite(uint8(ImosN),'mosaiqueN.jpg');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Tests sur d'autres images                      %  
+% Tests sur d'autres images : SALON              %  
 %                                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Im1 = rgb2gray(imread('images/salon_2.jpg'));
-Im2 = rgb2gray(imread('images/salon_3.jpg'));
+seuil = 0.97;
+TailleFenetre = 17;
+NbPoints = 100; 
+k = 0.05;
 
-[XY_1,Res_1] = harris(Im1,TailleFenetre,NbPoints,k);
-[XY_2,Res_2] = harris(Im2,TailleFenetre,NbPoints,k);
-figure;
-affichage_POI(Im1,XY_1,'POI Image 1',1,2,1);
-affichage_POI(Im2,XY_2,'POI Image 2',1,2,2);
-
-contrainte = "all"; % choisir une contrainte : "aucune", "seuil", "symetrie" ou "all"
-affichage = true;
-[XY_C1,XY_C2] = apparier_POI(Im1,XY_1,Im2,XY_2,TailleFenetre,0.97,contrainte,affichage);
-
-images = cell(1,4);
-for i=1:4
+images = cell(1,5);
+for i=1:5
     images{i} = imread('images/salon_' + string(i) + '.jpg');
 end
-seuil = 0.97;
 ImosN = mosaiqueN(images, TailleFenetre, NbPoints, k, seuil);
 figure;
 affichage_image(uint8(ImosN),'Mosaique obtenue a partir de N images couleur initiales (version 4)',1,1,1);
